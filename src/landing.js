@@ -1,0 +1,338 @@
+import "./style.css";
+import {
+  ArrowUp,
+  Camera,
+  CalendarDays,
+  Check,
+  CirclePlay,
+  Clapperboard,
+  Download,
+  Info,
+  MapPin,
+  Medal,
+  Music2,
+  Share2,
+  Store,
+  Ticket,
+  createIcons,
+} from "lucide";
+
+const header = document.getElementById("site-header");
+const menuToggle = document.getElementById("menu-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+const planInput = document.getElementById("plan");
+const planButtons = document.querySelectorAll("[data-plan]");
+const sponsorForm = document.getElementById("sponsor-form");
+const formMessage = document.getElementById("form-message");
+const hero = document.getElementById("inicio");
+const heroLayers = document.querySelectorAll("[data-hero-layer]");
+const heroOverlay = document.querySelector("[data-hero-overlay]");
+const heroCopy = document.querySelector("[data-hero-copy]");
+const heroScrollIndicator = document.querySelector(".hero-scroll-indicator");
+const productTrack = document.querySelector(".product-track");
+const productGroup = productTrack?.querySelector(".product-group");
+const emailInput = sponsorForm?.querySelector('input[name="email"]');
+const phoneInput = sponsorForm?.querySelector('input[name="telefono"]');
+const benefitInput = sponsorForm?.querySelector('textarea[name="beneficio"]');
+const benefitCounter = document.getElementById("beneficio-count");
+const storyInput = sponsorForm?.querySelector('textarea[name="historia"]');
+const badgeRadios = sponsorForm?.querySelectorAll('input[name="quiereInsignia"]');
+const storyLinkField = document.getElementById("asociar-historia-field");
+const storyLinkInput = sponsorForm?.querySelector('input[name="asociarHistoriaInsignia"]');
+const sponsorSubmitButton = sponsorForm?.querySelector('button[type="submit"]');
+const scrollTopButton = document.getElementById("scroll-top");
+const API = (import.meta.env.VITE_API_URL || "http://localhost:3333").replace(
+  /\/$/,
+  ""
+);
+
+createIcons({
+  icons: {
+    ArrowUp,
+    Camera,
+    CalendarDays,
+    Check,
+    CirclePlay,
+    Clapperboard,
+    Download,
+    Info,
+    MapPin,
+    Medal,
+    Music2,
+    Share2,
+    Store,
+    Ticket,
+  },
+});
+
+if (productTrack && productGroup) {
+  const repeatedProducts = productGroup.cloneNode(true);
+  repeatedProducts.setAttribute("aria-hidden", "true");
+  productTrack.appendChild(repeatedProducts);
+}
+
+function closeMobileMenu() {
+  if (!menuToggle || !mobileMenu) return;
+
+  menuToggle.classList.remove("menu-open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  mobileMenu.classList.add("hidden");
+}
+
+function updateHeader() {
+  if (!header) return;
+
+  const isScrolled = window.scrollY > 24;
+  header.classList.toggle("shadow-sm", isScrolled);
+}
+
+function clamp(value, min = 0, max = 1) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function smoothstep(edgeA, edgeB, value) {
+  const progress = clamp((value - edgeA) / (edgeB - edgeA));
+  return progress * progress * (3 - 2 * progress);
+}
+
+function updateHeroParallax() {
+  if (!hero || !heroLayers.length) return;
+
+  const scrollableDistance = hero.offsetHeight - window.innerHeight;
+  const progress = scrollableDistance > 0
+    ? clamp(-hero.getBoundingClientRect().top / scrollableDistance)
+    : 0;
+
+  const layerOpacity = {
+    day: 1 - smoothstep(0.18, 0.42, progress),
+    sunset:
+      smoothstep(0.18, 0.42, progress) *
+      (1 - smoothstep(0.56, 0.78, progress)),
+    night: smoothstep(0.56, 0.78, progress),
+  };
+
+  heroLayers.forEach((layer) => {
+    const layerName = layer.dataset.heroLayer;
+    const opacity = layerOpacity[layerName] ?? 0;
+    const direction = layerName === "day" ? -1 : layerName === "sunset" ? 0.35 : 1;
+    const translateY = (progress - 0.5) * 22 * direction;
+    const scale = 1.06 + progress * 0.035;
+
+    layer.style.opacity = opacity.toFixed(3);
+    layer.style.transform = `scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(2)}px)`;
+  });
+
+  const isNight = progress > 0.58;
+  heroOverlay?.classList.toggle("is-night", isNight);
+  heroCopy?.classList.toggle("is-night", isNight);
+  header?.classList.toggle("header-night", isNight);
+
+  if (heroScrollIndicator) {
+    heroScrollIndicator.style.opacity = String(1 - smoothstep(0.1, 0.34, progress));
+  }
+}
+
+menuToggle?.addEventListener("click", () => {
+  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+  menuToggle.setAttribute("aria-expanded", String(!isOpen));
+  menuToggle.classList.toggle("menu-open", !isOpen);
+  mobileMenu?.classList.toggle("hidden", isOpen);
+});
+
+document.querySelectorAll("#mobile-menu a").forEach((link) => {
+  link.addEventListener("click", closeMobileMenu);
+});
+
+planButtons.forEach((button) => {
+  button.setAttribute("aria-pressed", String(button.classList.contains("is-selected")));
+
+  button.addEventListener("click", () => {
+    const selectedPlan = button.dataset.plan || "1 mes";
+    planInput.value = selectedPlan;
+
+    planButtons.forEach((currentButton) => {
+      const isSelected = currentButton === button;
+      currentButton.classList.toggle("is-selected", isSelected);
+      currentButton.setAttribute("aria-pressed", String(isSelected));
+    });
+  });
+});
+
+function validateEmail() {
+  if (!emailInput) return true;
+
+  const value = emailInput.value.trim();
+  const isValid = !value || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+  emailInput.setCustomValidity(
+    isValid ? "" : "Ingresá un email válido, por ejemplo contacto@comercio.com."
+  );
+  return isValid;
+}
+
+function validatePhone() {
+  if (!phoneInput) return true;
+
+  const value = phoneInput.value.trim();
+  const digitCount = value.replace(/\D/g, "").length;
+  const isValid = !value || (digitCount >= 8 && digitCount <= 15);
+  phoneInput.setCustomValidity(
+    isValid ? "" : "Ingresá un teléfono válido de entre 8 y 15 números."
+  );
+  return isValid;
+}
+
+function updateBenefitCounter() {
+  if (!benefitInput || !benefitCounter) return;
+  benefitCounter.textContent = `${benefitInput.value.length}/180`;
+}
+
+function validateStoryAssociation() {
+  if (!storyInput || !storyLinkInput) return true;
+
+  const needsStory = storyLinkInput.checked;
+  const isValid = !needsStory || storyInput.value.trim().length > 0;
+  storyInput.setCustomValidity(
+    isValid ? "" : "Escribí la historia o leyenda que querés asociar a la insignia."
+  );
+  return isValid;
+}
+
+function updateBadgeOptions() {
+  if (!badgeRadios || !storyLinkField || !storyLinkInput) return;
+
+  const selectedBadgeOption = sponsorForm.querySelector(
+    'input[name="quiereInsignia"]:checked'
+  )?.value;
+  const wantsBadge = selectedBadgeOption === "si";
+
+  storyLinkField.classList.toggle("hidden", !wantsBadge);
+  if (!wantsBadge) {
+    storyLinkInput.checked = false;
+    validateStoryAssociation();
+  }
+}
+
+emailInput?.addEventListener("input", validateEmail);
+phoneInput?.addEventListener("input", validatePhone);
+benefitInput?.addEventListener("input", updateBenefitCounter);
+storyInput?.addEventListener("input", validateStoryAssociation);
+storyLinkInput?.addEventListener("change", validateStoryAssociation);
+badgeRadios?.forEach((radio) => radio.addEventListener("change", updateBadgeOptions));
+
+updateBenefitCounter();
+updateBadgeOptions();
+
+function setFormMessage(type, text) {
+  if (!formMessage) return;
+
+  formMessage.textContent = text;
+  formMessage.classList.remove(
+    "hidden",
+    "bg-menta/40",
+    "bg-rosa/30",
+    "text-uva",
+    "text-fucsia"
+  );
+  formMessage.classList.add(type === "success" ? "bg-menta/40" : "bg-rosa/30");
+  formMessage.classList.add(type === "success" ? "text-uva" : "text-fucsia");
+}
+
+function getFormData(form) {
+  const data = new FormData(form);
+  return {
+    plan: data.get("plan") || "1 mes",
+    nombreComercio: data.get("nombreComercio") || "",
+    rubro: data.get("rubro") || "",
+    direccion: data.get("direccion") || "",
+    email: data.get("email") || "",
+    telefono: data.get("telefono") || "",
+    redes: data.get("redes") || "",
+    tipoBeneficio: data.get("tipoBeneficio") || "",
+    beneficio: data.get("beneficio") || "",
+    historia: data.get("historia") || "",
+    quiereInsignia: data.get("quiereInsignia") || "no",
+    asociarHistoriaInsignia: data.get("asociarHistoriaInsignia") === "on",
+  };
+}
+
+function setFormSubmitting(isSubmitting) {
+  if (!sponsorSubmitButton || !sponsorForm) return;
+
+  sponsorSubmitButton.disabled = isSubmitting;
+  sponsorSubmitButton.textContent = isSubmitting
+    ? "Enviando solicitud..."
+    : "Enviar solicitud";
+  sponsorForm.setAttribute("aria-busy", String(isSubmitting));
+}
+
+sponsorForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  validateEmail();
+  validatePhone();
+  validateStoryAssociation();
+
+  if (!sponsorForm.checkValidity()) {
+    sponsorForm.reportValidity();
+    setFormMessage("error", "Revisá los campos obligatorios para poder enviar la solicitud.");
+    return;
+  }
+
+  const data = getFormData(sponsorForm);
+  setFormSubmitting(true);
+
+  try {
+    const response = await fetch(`${API}/api/comercios/solicitudes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        responseData.message ||
+          "No pudimos enviar la solicitud. Intentá nuevamente."
+      );
+    }
+
+    setFormMessage(
+      "success",
+      responseData.message ||
+        "Recibimos tu solicitud. Te vamos a contactar por email con los próximos pasos."
+    );
+    sponsorForm.reset();
+    planInput.value = "1 mes";
+    planButtons.forEach((button, index) => {
+      const isSelected = index === 0;
+      button.classList.toggle("is-selected", isSelected);
+      button.setAttribute("aria-pressed", String(isSelected));
+    });
+    updateBenefitCounter();
+    updateBadgeOptions();
+  } catch (error) {
+    setFormMessage(
+      "error",
+      error.message ||
+        "No pudimos enviar la solicitud. Intentá nuevamente en unos minutos."
+    );
+  } finally {
+    setFormSubmitting(false);
+  }
+});
+
+function updatePageEffects() {
+  updateHeader();
+  updateHeroParallax();
+  scrollTopButton?.classList.toggle("is-visible", window.scrollY > 560);
+}
+
+scrollTopButton?.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+window.addEventListener("scroll", updatePageEffects, { passive: true });
+window.addEventListener("resize", updatePageEffects);
+updatePageEffects();

@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Xendaria es una app de turismo urbano en CABA con mapa interactivo, rutas, insignias, historias desbloqueables, merch y visibilidad para comercios locales."
+    />
+    <meta
+      name="keywords"
+      content="Xendaria, turismo CABA, rutas urbanas, comercios locales, insignias, mapa interactivo, Buenos Aires"
+    />
+    <meta name="author" content="Xendaria" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Xendaria - Explorá Buenos Aires de otra forma" />
+    <meta
+      property="og:description"
+      content="Descubrí puntos cercanos, desbloqueá historias e insignias, recorré rutas recomendadas y conectá con comercios locales."
+    />
+    <meta property="og:image" content="/src/assets/banner.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="/src/assets/logo-oficial.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Xendaria - Turismo urbano, rutas y comercios locales</title>
+  </head>
+
+  <body class="bg-crema text-uva">
+    <header
+      id="site-header"
+      class="fixed left-0 top-0 z-50 w-full border-b border-crema/15 bg-uva shadow-sm"
+    >
+      <nav class="relative mx-auto flex max-w-[1520px] items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <a href="#inicio" class="flex items-center gap-3" aria-label="Ir al inicio de Xendaria">
+          <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white shadow-sm">
+            <img class="h-8 w-8 object-contain" src="/src/assets/logo-oficial.png" alt="" />
+          </span>
+          <span class="brand-name text-2xl text-crema md:text-3xl">Xendaria</span>
+        </a>
+
+        <button
+          id="menu-toggle"
+          class="header-menu-button flex h-11 w-11 items-center justify-center rounded-full bg-crema text-uva shadow-md ring-1 ring-crema/30 lg:hidden"
+          type="button"
+          aria-controls="main-menu"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Abrir menú</span>
+          <span class="menu-lines" aria-hidden="true"></span>
+        </button>
+
+        <div id="main-menu" class="hidden items-center gap-4 text-sm font-extrabold text-crema lg:flex lg:gap-5 xl:gap-6">
+          <a class="nav-link" href="#que-es">Qué es</a>
+          <a class="nav-link" href="#funciona">Cómo funciona</a>
+          <a class="nav-link" href="#usuarios">Usuarios</a>
+          <a class="nav-link" href="#merch">Merch</a>
+          <div class="nav-socials" aria-label="Redes sociales de Xendaria">
+            <a
+              class="social-icon"
+              href="https://www.instagram.com/xendariaoficial/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram de Xendaria"
+            >
+              <i data-lucide="camera" aria-hidden="true"></i>
+            </a>
+            <a
+              class="social-icon"
+              href="https://www.tiktok.com/@xendariaoficial?_r=1&_t=ZM-91Y0bT9zVDX"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="TikTok de Xendaria"
+            >
+              <i data-lucide="music-2" aria-hidden="true"></i>
+            </a>
+            <a
+              class="social-icon"
+              href="https://www.youtube.com/@XendariaOficial"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="YouTube de Xendaria"
+            >
+              <i data-lucide="circle-play" aria-hidden="true"></i>
+            </a>
+          </div>
+          <a
+            class="nav-cta nav-cta-commerce"
+            href="#comercios"
+          >
+            <i data-lucide="store" aria-hidden="true"></i>
+            Comercios
+          </a>
+          <a class="nav-cta nav-cta-download" href="#usuarios">
+            <i data-lucide="download" aria-hidden="true"></i>
+            Descargar app
+          </a>
+        </div>
+      </nav>
+
+      <div id="mobile-menu" class="hidden border-t border-crema/15 bg-uva px-5 pb-5 pt-2 lg:hidden">
+        <div class="grid gap-2 text-base font-extrabold text-crema">
+          <a class="mobile-nav-link" href="#que-es">Qué es</a>
+          <a class="mobile-nav-link" href="#funciona">Cómo funciona</a>
+          <a class="mobile-nav-link" href="#usuarios">Usuarios</a>
+          <a class="mobile-nav-link" href="#merch">Merch</a>
+          <div class="mobile-socials" aria-label="Redes sociales de Xendaria">
+            <a
+              class="social-icon"
+              href="https://www.instagram.com/xendariaoficial/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram de Xendaria"
+            >
+              <i data-lucide="camera" aria-hidden="true"></i>
+            </a>
+            <a
+              class="social-icon"
+              href="https://www.tiktok.com/@xendariaoficial?_r=1&_t=ZM-91Y0bT9zVDX"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="TikTok de Xendaria"
+            >
+              <i data-lucide="music-2" aria-hidden="true"></i>
+            </a>
+            <a
+              class="social-icon"
+              href="https://www.youtube.com/@XendariaOficial"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="YouTube de Xendaria"
+            >
+              <i data-lucide="circle-play" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="grid gap-2 pt-2">
+            <a class="nav-cta nav-cta-commerce mobile-nav-cta" href="#comercios">
+              <i data-lucide="store" aria-hidden="true"></i>
+              Comercios
+            </a>
+            <a class="nav-cta nav-cta-download mobile-nav-cta" href="#usuarios">
+              <i data-lucide="download" aria-hidden="true"></i>
+              Descargar app
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="inicio" class="hero-parallax relative h-[320vh] overflow-visible">
+        <div class="sticky top-0 h-screen overflow-hidden">
+          <img
+            class="hero-layer"
+            data-hero-layer="day"
+            src="/src/assets/banner.jpg"
+            alt="Ilustración de Buenos Aires de día en Xendaria"
+          />
+          <img
+            class="hero-layer"
+            data-hero-layer="sunset"
+            src="/src/assets/banner-tarde.jpg"
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            class="hero-layer"
+            data-hero-layer="night"
+            src="/src/assets/banner-noche.jpg"
+            alt=""
+            aria-hidden="true"
+          />
+
+          <div class="hero-overlay" data-hero-overlay></div>
+          <div class="hero-glow"></div>
+
+          <div class="hero-inner relative z-20">
+            <div class="hero-copy" data-hero-copy>
+              <p class="hero-pill">
+                Turismo urbano + recompensas + comercios locales
+              </p>
+              <h1 class="hero-title">
+                Buenos Aires te espera.
+              </h1>
+              <p class="mt-6 max-w-2xl text-lg font-bold leading-relaxed md:text-2xl">
+                Xendaria convierte la ciudad en un mapa interactivo con rutas, historias, insignias y beneficios en comercios cercanos.
+              </p>
+              <div class="hero-actions mt-9 flex flex-col gap-3 sm:flex-row">
+                <a class="btn-primary" href="#usuarios">Conocer la app</a>
+                <a class="btn-secondary" href="#comercios">Sumar comercio</a>
+              </div>
+            </div>
+
+            <img
+              class="hero-character animacion-chica"
+              src="/src/assets/banner-chica.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+
+          <div class="hero-scroll-indicator" aria-hidden="true">
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="fit-video-band" aria-labelledby="fit-video-title">
+        <div class="fit-video-shell">
+          <div class="fit-video-copy">
+            <p class="fit-video-kicker">
+              <i data-lucide="ticket" aria-hidden="true"></i>
+              Lanzamiento
+            </p>
+            <h2 id="fit-video-title">Xendaria se prepara para la FIT.</h2>
+            <p>
+              Un primer guiño de lanzamiento para despertar curiosidad antes de la feria. Xendaria llega con una propuesta para mirar Buenos Aires de otra forma: más cercana, más caminable y conectada con sus historias.
+            </p>
+            <div class="fit-video-tags" aria-label="Ejes del lanzamiento">
+              <span class="fit-video-tag-fit"><i data-lucide="calendar-days" aria-hidden="true"></i> Feria FIT</span>
+              <span class="fit-video-tag-promo"><i data-lucide="clapperboard" aria-hidden="true"></i> Video promo</span>
+            </div>
+          </div>
+
+          <div class="fit-video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/LWv7I0P0bE0?si=bTBrSOnRMqT0APUQ"
+              title="Video promocional de Xendaria para la feria FIT"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section id="que-es" class="section-wrap grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <p class="section-kicker">La app</p>
+          <h2 class="section-title">Una forma más viva de recorrer CABA.</h2>
+          <p class="section-text">
+            Xendaria muestra puntos cercanos, rutas recomendadas y contenido que se desbloquea cuando el usuario llega al lugar. La experiencia mezcla turismo, juego suave, comunidad y recompensas.
+          </p>
+          <div class="mt-8 grid gap-3 sm:grid-cols-3">
+            <div class="metric-strip bg-rosa/30">
+              <i data-lucide="map-pin" aria-hidden="true"></i>
+              <div>
+                <strong>Mapa</strong>
+                <span>Puntos cercanos y propios.</span>
+              </div>
+            </div>
+            <div class="metric-strip bg-menta/45">
+              <i data-lucide="share-2" aria-hidden="true"></i>
+              <div>
+                <strong>Rutas</strong>
+                <span>Recorridos cortos o largos.</span>
+              </div>
+            </div>
+            <div class="metric-strip bg-vainilla">
+              <i data-lucide="medal" aria-hidden="true"></i>
+              <div>
+                <strong>Insignias</strong>
+                <span>Recompensas por visitar.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center lg:justify-end">
+          <img
+            class="h-auto max-h-[580px] w-auto max-w-full object-contain drop-shadow-[0_20px_24px_rgba(64,26,55,0.18)]"
+            src="/src/assets/mockupcelu.png"
+            alt="Mapa interactivo de Xendaria visto desde un celular"
+          />
+        </div>
+      </section>
+
+      <section id="funciona" class="section-wrap">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="section-kicker mx-auto">Cómo funciona</p>
+          <h2 class="section-title">Simple para usuarios, útil para la ciudad.</h2>
+        </div>
+
+        <div class="steps-path">
+          <svg class="steps-route steps-route-mobile" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 9 7 C 10 22, 91 23, 91 36 C 91 52, 10 54, 9 70" pathLength="100"></path>
+          </svg>
+          <svg class="steps-route steps-route-desktop" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 16.7 15 C 31 15, 35 38, 50 38 C 65 38, 69 15, 83.3 15" pathLength="100"></path>
+          </svg>
+
+          <article class="step-stop">
+            <span class="step-number">1</span>
+            <h3>Entrás al mapa</h3>
+            <p>La app toma tu ubicación y te muestra qué lugares tenés cerca para descubrir.</p>
+          </article>
+          <article class="step-stop">
+            <span class="step-number">2</span>
+            <h3>Elegís un punto o ruta</h3>
+            <p>Podés explorar libremente o seguir rutas recomendadas con puntos existentes en el mapa.</p>
+          </article>
+          <article class="step-stop">
+            <span class="step-number">3</span>
+            <h3>Visitás y desbloqueás</h3>
+            <p>Al llegar, aparecen historias, insignias, calificaciones y posibles beneficios comerciales.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="usuarios" class="section-wrap grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
+        <figure class="badge-showcase order-2 lg:order-1">
+          <img class="badge-token badge-token-rufinita" src="/src/assets/insignia-rufinita.jpg" alt="Insignia Rufinita" />
+          <img class="badge-token badge-token-reservito" src="/src/assets/insignia-reservito.jpg" alt="Insignia Reservito" />
+          <img class="badge-token badge-token-main" src="/src/assets/insignia-leoncitos.jpg" alt="Insignia Leoncitos" />
+          <img class="badge-token badge-token-pasco" src="/src/assets/insignia-pasco.jpg" alt="Insignia Pasco" />
+          <img class="badge-token badge-token-trono" src="/src/assets/insignia-trono.jpg" alt="Insignia El Trono" />
+          <figcaption class="badge-showcase-caption">
+            <i data-lucide="medal" aria-hidden="true"></i>
+            Insignias que guardan historias de la ciudad.
+          </figcaption>
+        </figure>
+        <div class="order-1 lg:order-2">
+          <p class="section-kicker">Para exploradores</p>
+          <h2 class="section-title">El usuario no solo mira la ciudad: la colecciona.</h2>
+          <ul class="feature-list">
+            <li>Encuentra puntos cercanos sin perderse entre opciones infinitas.</li>
+            <li>Desbloquea insignias, historias y leyendas al visitar lugares reales.</li>
+            <li>Guarda favoritos, crea puntos propios y comparte parte de su perfil.</li>
+            <li>Puede comprar merch oficial desde la app con MercadoPago.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="merch" class="section-wrap">
+        <div class="merch-editorial-heading">
+          <div>
+            <p class="section-kicker">Merch oficial</p>
+            <h2 class="section-title">Objetos para salir a explorar.</h2>
+            <p class="section-text">
+              Objetos útiles para acompañarte cuando salís a caminar y algunas cositas para que lleves Xendaria con vos a donde vayas.
+            </p>
+          </div>
+        </div>
+
+        <div class="merch-lookbook">
+          <figure class="merch-lookbook-main">
+            <img src="/src/assets/merch/models-2.png" alt="Modelos usando indumentaria urbana de Xendaria" />
+            <p class="merch-lookbook-word" aria-hidden="true">Caminá.<br />Explorá.<br />Llevá.</p>
+          </figure>
+          <figure class="merch-lookbook-secondary">
+            <img src="/src/assets/merch/models3.png" alt="Personas usando buzos, paraguas y vasos de Xendaria" />
+            <figcaption>Hecho para acompañar el camino.</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="product-marquee-title">Compañeros para tu próximo paseo</h3>
+        <p class="product-marquee-note">Podés comprar toda la colección directamente desde la app.</p>
+        <div class="product-marquee" aria-label="Productos de la tienda Xendaria">
+          <div class="product-track">
+            <div class="product-group">
+              <article class="product-slide">
+                <img src="/src/assets/merch/paraguas.jpg" alt="Paraguas Xendaria" />
+                <h3>Paraguas Xendaria</h3>
+              </article>
+              <article class="product-slide">
+                <img src="/src/assets/merch/pilusos.jpg" alt="Piluso urbano Xendaria" />
+                <h3>Piluso urbano</h3>
+              </article>
+              <article class="product-slide">
+                <img src="/src/assets/merch/powerbank.jpg" alt="Powerbank Xendaria" />
+                <h3>Powerbank</h3>
+              </article>
+              <article class="product-slide">
+                <img src="/src/assets/merch/bolso.png" alt="Mochila Xendaria" />
+                <h3>Mochila urbana</h3>
+              </article>
+              <article class="product-slide">
+                <img src="/src/assets/merch/riñonera.png" alt="Riñonera Xendaria" />
+                <h3>Riñonera</h3>
+              </article>
+              <article class="product-slide">
+                <img src="/src/assets/merch/termo.png" alt="Termo Xendaria" />
+                <h3>Termo para el camino</h3>
+              </article>
+              <article class="product-slide">
+                <img src="/src/assets/merch/stickers2.jpg" alt="Stickers Xendaria" />
+                <h3>Stickers</h3>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="comercios" class="section-wrap">
+        <div class="grid gap-10 lg:grid-cols-[0.88fr_1.12fr]">
+          <div class="commerce-copy">
+            <p class="section-kicker">Para comercios</p>
+            <h2 class="section-title">Adherí tu comercio a Xendaria.</h2>
+            <p class="section-text">
+              Ofrecé a nuestra comunidad un beneficio por visitar tu local o compartí una historia o leyenda que despierte curiosidad y los invite a acercarse. Completá el formulario y vas a recibir por email los próximos pasos para activar tu participación.
+            </p>
+            <p class="commerce-payment-note">
+              El pago se realiza por transferencia bancaria una vez que nos comuniquemos con el comercio y confirmemos la propuesta.
+            </p>
+
+            <div class="commerce-includes">
+              <h3>
+                <i data-lucide="check" aria-hidden="true"></i>
+                Qué incluye
+              </h3>
+              <ul>
+                <li>
+                  <span class="commerce-check"><i data-lucide="check" aria-hidden="true"></i></span>
+                  Visibilidad dentro del mapa y recorridos recomendados.
+                </li>
+                <li>
+                  <span class="commerce-check"><i data-lucide="check" aria-hidden="true"></i></span>
+                  Una semana de prueba antes de activar la suscripción paga.
+                </li>
+                <li>
+                  <span class="commerce-check"><i data-lucide="check" aria-hidden="true"></i></span>
+                  Posibilidad de sumar una historia o leyenda y una insignia asociada.
+                </li>
+                <li>
+                  <span class="commerce-check"><i data-lucide="check" aria-hidden="true"></i></span>
+                  Manejo personalizado de la suscripción para que puedas recibir soporte ante cualquier inconveniente.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rounded-[2rem] border border-uva/10 bg-white p-5 shadow-xl md:p-7">
+            <div class="mb-6">
+              <p class="section-kicker">Solicitud comercial</p>
+              <h3 class="font-fredoka text-3xl font-semibold text-uva">Sumá tu comercio</h3>
+              <p class="mt-2 text-sm font-bold text-uva/60">
+                Completá los datos y te respondemos con los pasos para activar la suscripción.
+              </p>
+            </div>
+
+            <div class="mb-6 grid gap-3 sm:grid-cols-3" role="group" aria-label="Elegir plan de suscripción">
+              <button class="plan-button is-selected" type="button" data-plan="1 mes">
+                <strong>1 mes</strong>
+                <span class="plan-price">$10.000</span>
+                <small>Ideal para probar.</small>
+              </button>
+              <button class="plan-button" type="button" data-plan="3 meses">
+                <strong>3 meses</strong>
+                <span class="plan-price">$24.000</span>
+                <small>Más continuidad.</small>
+              </button>
+              <button class="plan-button" type="button" data-plan="6 meses">
+                <strong>6 meses</strong>
+                <span class="plan-price">$36.000</span>
+                <small>Mayor presencia.</small>
+              </button>
+            </div>
+
+            <form id="sponsor-form" class="grid gap-4" novalidate>
+              <input type="hidden" id="plan" name="plan" value="1 mes" />
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <label class="form-field">
+                  <span>Nombre del comercio</span>
+                  <input name="nombreComercio" type="text" placeholder="Ej: Café Rufina" required />
+                </label>
+                <label class="form-field">
+                  <span>Rubro</span>
+                  <select name="rubro" required>
+                    <option value="">Seleccionar rubro</option>
+                    <option>Gastronomía</option>
+                    <option>Cafetería</option>
+                    <option>Librería</option>
+                    <option>Indumentaria</option>
+                    <option>Otro</option>
+                  </select>
+                </label>
+              </div>
+
+              <label class="form-field">
+                <span>Dirección</span>
+                <input name="direccion" type="text" placeholder="Ej: Av. Corrientes 1234, CABA" required />
+              </label>
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <label class="form-field">
+                  <span>Email</span>
+                  <input name="email" type="email" autocomplete="email" placeholder="contacto@comercio.com" required />
+                </label>
+                <label class="form-field">
+                  <span>Teléfono</span>
+                  <input name="telefono" type="tel" inputmode="tel" autocomplete="tel" minlength="8" maxlength="24" pattern="[0-9+() -]{8,24}" placeholder="11 1234 5678" required />
+                </label>
+              </div>
+
+              <label class="form-field">
+                <span>Instagram o sitio web</span>
+                <input name="redes" type="text" placeholder="@comercio o https://..." />
+              </label>
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <label class="form-field">
+                  <span>Tipo de beneficio</span>
+                  <select name="tipoBeneficio" required>
+                    <option value="">Seleccionar beneficio</option>
+                    <option value="descuento">Descuento porcentual</option>
+                    <option value="cortesia">Producto o consumición de cortesía</option>
+                    <option value="primera_visita">Beneficio por primera visita</option>
+                    <option value="ruta">Beneficio al completar una ruta</option>
+                    <option value="otro">Otro beneficio</option>
+                  </select>
+                </label>
+
+                <label class="form-field">
+                  <span>Detalle del beneficio</span>
+                  <span class="textarea-with-counter">
+                    <textarea name="beneficio" rows="3" maxlength="180" placeholder="Ej: 10% de descuento en la primera visita." required></textarea>
+                    <small id="beneficio-count" class="field-counter">0/180</small>
+                  </span>
+                </label>
+              </div>
+
+              <label class="form-field">
+                <span>Historia o contenido opcional</span>
+                <textarea name="historia" rows="3" placeholder="Algo breve que haga más interesante al comercio dentro de la app."></textarea>
+              </label>
+
+              <fieldset class="insignia-choice">
+                <legend>¿Querés agregar una insignia?</legend>
+                <div>
+                  <label>
+                    <input type="radio" name="quiereInsignia" value="no" checked />
+                    <span>No por ahora</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="quiereInsignia" value="si" />
+                    <span>Sí, quiero sumarla</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <label id="asociar-historia-field" class="story-link-choice hidden">
+                <input type="checkbox" name="asociarHistoriaInsignia" />
+                <span>Asociar la historia o leyenda a la insignia</span>
+              </label>
+
+              <div class="commerce-info" role="note">
+                <i data-lucide="info" aria-hidden="true"></i>
+                <p>
+                  <strong>Una historia puede atraer más visitas.</strong>
+                  Te sugerimos compartir una curiosidad o leyenda del local. Si necesitamos imágenes o contenido adicional, te vamos a contactar por email.
+                </p>
+              </div>
+
+              <p id="form-message" class="hidden rounded-2xl px-4 py-3 text-sm font-extrabold" role="status"></p>
+
+              <button class="btn-primary w-full justify-center" type="submit">
+                Enviar solicitud
+              </button>
+
+              <p class="text-center text-xs font-bold text-uva/50">
+                También podés escribirnos a xendariaoficial@gmail.com.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <button id="scroll-top" class="scroll-top-button" type="button" aria-label="Volver al inicio">
+      <i data-lucide="arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <footer class="mt-24 bg-uva px-5 py-12 text-crema md:px-8">
+      <div class="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+        <div>
+          <div class="flex items-center gap-3">
+            <img class="h-10 w-auto" src="/src/assets/logo-alt.png" alt="Logo Xendaria" />
+            <span class="brand-name text-3xl text-crema">Xendaria</span>
+          </div>
+          <p class="mt-4 max-w-md text-sm font-bold leading-relaxed text-crema/75">
+            App de turismo urbano para descubrir Buenos Aires con puntos, rutas, historias, insignias y comercios locales.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-extrabold uppercase tracking-[0.18em] text-menta">Secciones</h2>
+          <ul class="mt-4 grid gap-2 text-sm font-bold text-crema/75">
+            <li><a href="#usuarios">Usuarios</a></li>
+            <li><a href="#comercios">Comercios</a></li>
+            <li><a href="#merch">Merch</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-extrabold uppercase tracking-[0.18em] text-menta">Contacto</h2>
+          <ul class="mt-4 grid gap-2 text-sm font-bold text-crema/75">
+            <li><a href="mailto:xendariaoficial@gmail.com">xendariaoficial@gmail.com</a></li>
+            <li><a href="https://www.instagram.com/xendariaoficial/">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@xendariaoficial?_r=1&_t=ZM-91Y0bT9zVDX">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+
+        <div class="mx-auto mt-10 max-w-7xl border-t border-crema/15 pt-5 text-xs font-bold text-crema/50">
+        © 2026 Xendaria - Buenos Aires.
+      </div>
+    </footer>
+
+    <script type="module" src="/src/landing.js"></script>
+  </body>
+</html>
