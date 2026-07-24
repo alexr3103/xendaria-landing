@@ -374,6 +374,45 @@
     @apply bg-vainilla;
   }
 
+  .app-cta-band {
+    @apply relative mt-20 overflow-hidden border-y border-uva/10 py-8 md:mt-28 md:py-10;
+    background-color: #fdf6f0;
+    scroll-margin-top: 5rem;
+  }
+
+  .app-cta-band::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0;
+    background-image: url("./assets/trama-abstracta.png");
+    background-position: center;
+    background-size: 1100px auto;
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+
+  .app-cta-shell {
+    @apply relative mx-auto grid max-w-7xl items-center gap-6 px-5 md:px-8 lg:grid-cols-[1.22fr_0.78fr] lg:gap-12;
+  }
+
+  .app-cta-visual {
+    @apply w-full max-w-[380px] justify-self-center overflow-hidden md:max-w-[760px];
+    aspect-ratio: 4 / 3;
+  }
+
+  .app-cta-visual img {
+    @apply h-full w-full object-cover;
+    object-position: center;
+  }
+
+  .app-cta-copy {
+    @apply max-w-xl py-2;
+  }
+
+  .app-cta-copy .section-title {
+    font-size: clamp(2.35rem, 6vw, 4rem);
+    white-space: nowrap;
+  }
+
   @media (min-width: 768px) {
     .steps-path {
       @apply grid-cols-3 gap-8 pb-12;
@@ -402,6 +441,10 @@
 
     .step-stop p {
       @apply mx-auto;
+    }
+
+    .app-cta-visual {
+      aspect-ratio: 4 / 3;
     }
   }
 
