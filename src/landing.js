@@ -41,6 +41,8 @@ const storyLinkField = document.getElementById("asociar-historia-field");
 const storyLinkInput = sponsorForm?.querySelector('input[name="asociarHistoriaInsignia"]');
 const sponsorSubmitButton = sponsorForm?.querySelector('button[type="submit"]');
 const scrollTopButton = document.getElementById("scroll-top");
+const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+let scrollAnimationFrame = null;
 const API = (import.meta.env.VITE_API_URL || "http://localhost:3333").replace(
   /\/$/,
   ""
@@ -141,6 +143,67 @@ menuToggle?.addEventListener("click", () => {
 
 document.querySelectorAll("#mobile-menu a").forEach((link) => {
   link.addEventListener("click", closeMobileMenu);
+});
+
+function animateScrollTo(targetY) {
+  if (scrollAnimationFrame) {
+    cancelAnimationFrame(scrollAnimationFrame);
+  }
+
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+
+  if (reduceMotionQuery.matches || Math.abs(distance) < 2) {
+    window.scrollTo(0, targetY);
+    return;
+  }
+
+  const duration = Math.min(3400, Math.max(1200, Math.abs(distance) * 0.5));
+  const startTime = performance.now();
+  const root = document.documentElement;
+  const previousScrollBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = "auto";
+
+  function step(currentTime) {
+    const progress = Math.min((currentTime - startTime) / duration, 1);
+    const easedProgress = -(Math.cos(Math.PI * progress) - 1) / 2;
+
+    window.scrollTo(0, startY + distance * easedProgress);
+
+    if (progress < 1) {
+      scrollAnimationFrame = requestAnimationFrame(step);
+      return;
+    }
+
+    root.style.scrollBehavior = previousScrollBehavior;
+    scrollAnimationFrame = null;
+  }
+
+  scrollAnimationFrame = requestAnimationFrame(step);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const targetId = link.getAttribute("href");
+    const target = targetId === "#inicio"
+      ? document.documentElement
+      : document.querySelector(targetId);
+
+    if (!target) return;
+
+    event.preventDefault();
+    const headerOffset = targetId === "#inicio" ? 0 : (header?.offsetHeight || 0) + 16;
+    const targetY =
+      targetId === "#inicio"
+        ? 0
+        : Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerOffset);
+
+    if (window.location.hash !== targetId) {
+      window.history.pushState(null, "", targetId);
+    }
+
+    animateScrollTo(targetY);
+  });
 });
 
 planButtons.forEach((button) => {
@@ -330,7 +393,7 @@ function updatePageEffects() {
 }
 
 scrollTopButton?.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  animateScrollTo(0);
 });
 
 window.addEventListener("scroll", updatePageEffects, { passive: true });
