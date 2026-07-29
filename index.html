@@ -1,30 +1,30 @@
 <!doctype html>
 <html lang="es-AR">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
       name="description"
       content="Xendaria es una app de turismo urbano en CABA con mapa interactivo, rutas, insignias, historias desbloqueables, merch y visibilidad para comercios locales."
-    />
+    >
     <meta
       name="keywords"
       content="Xendaria, turismo CABA, rutas urbanas, comercios locales, insignias, mapa interactivo, Buenos Aires"
-    />
-    <meta name="author" content="Xendaria" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Xendaria - Explorá Buenos Aires de otra forma" />
+    >
+    <meta name="author" content="Xendaria">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Xendaria - Explorá Buenos Aires de otra forma">
     <meta
       property="og:description"
       content="Descubrí puntos cercanos, desbloqueá historias e insignias, recorré rutas recomendadas y conectá con comercios locales."
-    />
-    <meta property="og:image" content="/src/assets/banner.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/png" href="/src/assets/logo-oficial.png" />
+    >
+    <meta property="og:image" content="/src/assets/banner.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="/src/assets/logo-oficial.png">
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
-    />
+    >
     <title>Xendaria - Turismo urbano, rutas y comercios locales</title>
   </head>
 
@@ -36,7 +36,7 @@
       <nav class="relative mx-auto flex max-w-[1520px] items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#inicio" class="flex items-center gap-3" aria-label="Ir al inicio de Xendaria">
           <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white shadow-sm">
-            <img class="h-8 w-8 object-contain" src="/src/assets/logo-oficial.png" alt="" />
+            <img class="h-8 w-8 object-contain" src="/src/assets/logo-oficial.png" alt="">
           </span>
           <span class="brand-name text-2xl text-crema md:text-3xl">Xendaria</span>
         </a>
@@ -58,7 +58,7 @@
           <a class="nav-link" href="#usuarios">Usuarios</a>
           <a class="nav-link" href="#probar-app">Probá la app</a>
           <a class="nav-link" href="#merch">Merch</a>
-          <div class="nav-socials" aria-label="Redes sociales de Xendaria">
+          <div class="nav-socials" role="group" aria-label="Redes sociales de Xendaria">
             <a
               class="social-icon"
               href="https://www.instagram.com/xendariaoficial/"
@@ -108,7 +108,7 @@
           <a class="mobile-nav-link" href="#usuarios">Usuarios</a>
           <a class="mobile-nav-link" href="#probar-app">Probá la app</a>
           <a class="mobile-nav-link" href="#merch">Merch</a>
-          <div class="mobile-socials" aria-label="Redes sociales de Xendaria">
+          <div class="mobile-socials" role="group" aria-label="Redes sociales de Xendaria">
             <a
               class="social-icon"
               href="https://www.instagram.com/xendariaoficial/"
@@ -162,21 +162,21 @@
             data-hero-layer="day"
             src="/src/assets/banner.jpg"
             alt="Ilustración de Buenos Aires de día en Xendaria"
-          />
+          >
           <img
             class="hero-layer"
             data-hero-layer="sunset"
             src="/src/assets/banner-tarde.jpg"
             alt=""
             aria-hidden="true"
-          />
+          >
           <img
             class="hero-layer"
             data-hero-layer="night"
             src="/src/assets/banner-noche.jpg"
             alt=""
             aria-hidden="true"
-          />
+          >
 
           <div class="hero-overlay" data-hero-overlay></div>
           <div class="hero-glow"></div>
@@ -203,7 +203,7 @@
               src="/src/assets/banner-chica.png"
               alt=""
               aria-hidden="true"
-            />
+            >
           </div>
 
           <div class="hero-scroll-indicator" aria-hidden="true">
@@ -223,7 +223,7 @@
             <p>
               Un primer guiño de lanzamiento para despertar curiosidad antes de la feria. Xendaria llega con una propuesta para mirar Buenos Aires de otra forma: más cercana, más caminable y conectada con sus historias.
             </p>
-            <div class="fit-video-tags" aria-label="Ejes del lanzamiento">
+            <div class="fit-video-tags" role="group" aria-label="Ejes del lanzamiento">
               <span class="fit-video-tag-fit"><i data-lucide="calendar-days" aria-hidden="true"></i> Feria FIT</span>
               <span class="fit-video-tag-promo"><i data-lucide="clapperboard" aria-hidden="true"></i> Video promo</span>
             </div>
@@ -279,7 +279,7 @@
             class="h-auto max-h-[580px] w-auto max-w-full object-contain drop-shadow-[0_20px_24px_rgba(64,26,55,0.18)]"
             src="/src/assets/mockupcelu.png"
             alt="Mapa interactivo de Xendaria visto desde un celular"
-          />
+          >
         </div>
       </section>
 
@@ -291,10 +291,18 @@
 
         <div class="steps-path">
           <svg class="steps-route steps-route-mobile" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 9 7 C 10 22, 91 23, 91 36 C 91 52, 10 54, 9 70" pathLength="100"></path>
+            <path
+              d="M 9 7 C 10 22, 91 23, 91 36 C 91 52, 10 54, 9 70"
+              pathLength="100"
+              vector-effect="non-scaling-stroke"
+            ></path>
           </svg>
           <svg class="steps-route steps-route-desktop" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 16.7 15 C 31 15, 35 38, 50 38 C 65 38, 69 15, 83.3 15" pathLength="100"></path>
+            <path
+              d="M 16.7 15 C 31 15, 35 38, 50 38 C 65 38, 69 15, 83.3 15"
+              pathLength="100"
+              vector-effect="non-scaling-stroke"
+            ></path>
           </svg>
 
           <article class="step-stop">
@@ -317,11 +325,11 @@
 
       <section id="usuarios" class="section-wrap grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
         <figure class="badge-showcase order-2 lg:order-1">
-          <img class="badge-token badge-token-rufinita" src="/src/assets/insignia-rufinita.jpg" alt="Insignia Rufinita" />
-          <img class="badge-token badge-token-reservito" src="/src/assets/insignia-reservito.jpg" alt="Insignia Reservito" />
-          <img class="badge-token badge-token-main" src="/src/assets/insignia-leoncitos.jpg" alt="Insignia Leoncitos" />
-          <img class="badge-token badge-token-pasco" src="/src/assets/insignia-pasco.jpg" alt="Insignia Pasco" />
-          <img class="badge-token badge-token-trono" src="/src/assets/insignia-trono.jpg" alt="Insignia El Trono" />
+          <img class="badge-token badge-token-rufinita" src="/src/assets/insignia-rufinita.jpg" alt="Insignia Rufinita">
+          <img class="badge-token badge-token-reservito" src="/src/assets/insignia-reservito.jpg" alt="Insignia Reservito">
+          <img class="badge-token badge-token-main" src="/src/assets/insignia-leoncitos.jpg" alt="Insignia Leoncitos">
+          <img class="badge-token badge-token-pasco" src="/src/assets/insignia-pasco.jpg" alt="Insignia Pasco">
+          <img class="badge-token badge-token-trono" src="/src/assets/insignia-trono.jpg" alt="Insignia El Trono">
           <figcaption class="badge-showcase-caption">
             <i data-lucide="medal" aria-hidden="true"></i>
             Insignias que guardan historias de la ciudad.
@@ -345,7 +353,7 @@
             <img
               src="/src/assets/QR-LANDING.png"
               alt="Código QR para abrir Xendaria desde un celular"
-            />
+            >
           </div>
 
           <div class="app-cta-copy">
@@ -370,46 +378,46 @@
 
         <div class="merch-lookbook">
           <figure class="merch-lookbook-main">
-            <img src="/src/assets/merch/models-2.png" alt="Modelos usando indumentaria urbana de Xendaria" />
-            <p class="merch-lookbook-word" aria-hidden="true">Caminá.<br />Explorá.<br />Llevá.</p>
+            <img src="/src/assets/merch/models-2.png" alt="Modelos usando indumentaria urbana de Xendaria">
+            <p class="merch-lookbook-word" aria-hidden="true">Caminá.<br>Explorá.<br>Llevá.</p>
           </figure>
           <figure class="merch-lookbook-secondary">
-            <img src="/src/assets/merch/models3.png" alt="Personas usando buzos, paraguas y vasos de Xendaria" />
+            <img src="/src/assets/merch/models3.png" alt="Personas usando buzos, paraguas y vasos de Xendaria">
             <figcaption>Hecho para acompañar el camino.</figcaption>
           </figure>
         </div>
 
         <h3 class="product-marquee-title">Compañeros para tu próximo paseo</h3>
         <p class="product-marquee-note">Podés comprar toda la colección directamente desde la app.</p>
-        <div class="product-marquee" aria-label="Productos de la tienda Xendaria">
+        <div class="product-marquee" role="group" aria-label="Productos de la tienda Xendaria">
           <div class="product-track">
             <div class="product-group">
               <article class="product-slide">
-                <img src="/src/assets/merch/paraguas.jpg" alt="Paraguas Xendaria" />
+                <img src="/src/assets/merch/paraguas.jpg" alt="Paraguas Xendaria">
                 <h3>Paraguas Xendaria</h3>
               </article>
               <article class="product-slide">
-                <img src="/src/assets/merch/pilusos.jpg" alt="Piluso urbano Xendaria" />
+                <img src="/src/assets/merch/pilusos.jpg" alt="Piluso urbano Xendaria">
                 <h3>Piluso urbano</h3>
               </article>
               <article class="product-slide">
-                <img src="/src/assets/merch/powerbank.jpg" alt="Powerbank Xendaria" />
+                <img src="/src/assets/merch/powerbank.jpg" alt="Powerbank Xendaria">
                 <h3>Powerbank</h3>
               </article>
               <article class="product-slide">
-                <img src="/src/assets/merch/bolso.png" alt="Mochila Xendaria" />
+                <img src="/src/assets/merch/bolso.png" alt="Mochila Xendaria">
                 <h3>Mochila urbana</h3>
               </article>
               <article class="product-slide">
-                <img src="/src/assets/merch/riñonera.png" alt="Riñonera Xendaria" />
+                <img src="/src/assets/merch/riñonera.png" alt="Riñonera Xendaria">
                 <h3>Riñonera</h3>
               </article>
               <article class="product-slide">
-                <img src="/src/assets/merch/termo.png" alt="Termo Xendaria" />
+                <img src="/src/assets/merch/termo.png" alt="Termo Xendaria">
                 <h3>Termo para el camino</h3>
               </article>
               <article class="product-slide">
-                <img src="/src/assets/merch/stickers2.jpg" alt="Stickers Xendaria" />
+                <img src="/src/assets/merch/stickers2.jpg" alt="Stickers Xendaria">
                 <h3>Stickers</h3>
               </article>
             </div>
@@ -483,12 +491,12 @@
             </div>
 
             <form id="sponsor-form" class="grid gap-4" novalidate>
-              <input type="hidden" id="plan" name="plan" value="1 mes" />
+              <input type="hidden" id="plan" name="plan" value="1 mes">
 
               <div class="grid gap-4 md:grid-cols-2">
                 <label class="form-field">
                   <span>Nombre del comercio</span>
-                  <input name="nombreComercio" type="text" placeholder="Ej: Café Rufina" required />
+                  <input name="nombreComercio" type="text" placeholder="Ej: Café Rufina" required>
                 </label>
                 <label class="form-field">
                   <span>Rubro</span>
@@ -505,23 +513,23 @@
 
               <label class="form-field">
                 <span>Dirección</span>
-                <input name="direccion" type="text" placeholder="Ej: Av. Corrientes 1234, CABA" required />
+                <input name="direccion" type="text" placeholder="Ej: Av. Corrientes 1234, CABA" required>
               </label>
 
               <div class="grid gap-4 md:grid-cols-2">
                 <label class="form-field">
                   <span>Email</span>
-                  <input name="email" type="email" autocomplete="email" placeholder="contacto@comercio.com" required />
+                  <input name="email" type="email" autocomplete="email" placeholder="contacto@comercio.com" required>
                 </label>
                 <label class="form-field">
                   <span>Teléfono</span>
-                  <input name="telefono" type="tel" inputmode="tel" autocomplete="tel" minlength="8" maxlength="24" pattern="[0-9+() -]{8,24}" placeholder="11 1234 5678" required />
+                  <input name="telefono" type="tel" inputmode="tel" autocomplete="tel" minlength="8" maxlength="24" pattern="[0-9+() -]{8,24}" placeholder="11 1234 5678" required>
                 </label>
               </div>
 
               <label class="form-field">
                 <span>Instagram o sitio web</span>
-                <input name="redes" type="text" placeholder="@comercio o https://..." />
+                <input name="redes" type="text" placeholder="@comercio o https://...">
               </label>
 
               <div class="grid gap-4 md:grid-cols-2">
@@ -555,18 +563,18 @@
                 <legend>¿Querés agregar una insignia?</legend>
                 <div>
                   <label>
-                    <input type="radio" name="quiereInsignia" value="no" checked />
+                    <input type="radio" name="quiereInsignia" value="no" checked>
                     <span>No por ahora</span>
                   </label>
                   <label>
-                    <input type="radio" name="quiereInsignia" value="si" />
+                    <input type="radio" name="quiereInsignia" value="si">
                     <span>Sí, quiero sumarla</span>
                   </label>
                 </div>
               </fieldset>
 
               <label id="asociar-historia-field" class="story-link-choice hidden">
-                <input type="checkbox" name="asociarHistoriaInsignia" />
+                <input type="checkbox" name="asociarHistoriaInsignia">
                 <span>Asociar la historia o leyenda a la insignia</span>
               </label>
 
@@ -602,7 +610,7 @@
       <div class="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <div class="flex items-center gap-3">
-            <img class="h-10 w-auto" src="/src/assets/logo-alt.png" alt="Logo Xendaria" />
+            <img class="h-10 w-auto" src="/src/assets/logo-alt.png" alt="Logo Xendaria">
             <span class="brand-name text-3xl text-crema">Xendaria</span>
           </div>
           <p class="mt-4 max-w-md text-sm font-bold leading-relaxed text-crema/75">

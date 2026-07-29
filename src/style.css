@@ -325,7 +325,6 @@
     stroke-width: 3.5;
     stroke-linecap: round;
     stroke-dasharray: 2.2 3.5;
-    vector-effect: non-scaling-stroke;
   }
 
   .steps-route-desktop {
