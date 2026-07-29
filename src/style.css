@@ -94,10 +94,11 @@
   }
 
   .header-menu-button {
-    position: fixed;
-    right: 1rem;
-    top: 0.85rem;
+    position: relative;
+    right: auto;
+    top: auto;
     transform: none;
+    flex-shrink: 0;
   }
 
   #menu-toggle {
@@ -818,31 +819,39 @@
     }
   }
 
-  .menu-lines,
+  .menu-lines {
+    @apply relative block h-0.5 w-5 rounded-full bg-uva transition;
+  }
+
   .menu-lines::before,
   .menu-lines::after {
-    @apply block h-0.5 w-5 rounded-full bg-uva transition;
     content: "";
+    @apply absolute left-0 block h-0.5 w-5 rounded-full bg-uva transition;
   }
 
   .menu-lines::before {
-    @apply -translate-y-1.5;
+    top: -6px;
   }
 
   .menu-lines::after {
-    @apply translate-y-1.5;
+    top: 6px;
   }
 
   .menu-open .menu-lines {
-    @apply bg-transparent;
+    background-color: transparent;
+  }
+
+  .menu-open .menu-lines::before,
+  .menu-open .menu-lines::after {
+    top: 0;
   }
 
   .menu-open .menu-lines::before {
-    @apply translate-y-0 rotate-45 bg-uva;
+    transform: rotate(45deg);
   }
 
   .menu-open .menu-lines::after {
-    @apply translate-y-0 -rotate-45 bg-uva;
+    transform: rotate(-45deg);
   }
 }
 
