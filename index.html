@@ -3,29 +3,48 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Xendaria | Turismo urbano, rutas y comercios locales en Buenos Aires</title>
+
     <meta
       name="description"
-      content="Xendaria es una app de turismo urbano en CABA con mapa interactivo, rutas, insignias, historias desbloqueables, merch y visibilidad para comercios locales."
+      content="Xendaria es una app de turismo urbano en Buenos Aires con mapa interactivo, rutas, historias, insignias, recompensas y visibilidad para comercios locales."
     >
     <meta
       name="keywords"
-      content="Xendaria, turismo CABA, rutas urbanas, comercios locales, insignias, mapa interactivo, Buenos Aires"
+      content="Xendaria, turismo urbano, Buenos Aires, CABA, rutas urbanas, mapa interactivo, insignias, recompensas, comercios locales"
     >
     <meta name="author" content="Xendaria">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#401A37">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="canonical" href="https://xendaria.com.ar/">
+    <link rel="icon" type="image/png" href="/src/assets/logo-oficial.png">
+
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Xendaria - Explorá Buenos Aires de otra forma">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="Xendaria">
+    <meta property="og:url" content="https://xendaria.com.ar/">
+    <meta property="og:title" content="Xendaria | Explorá Buenos Aires de otra forma">
     <meta
       property="og:description"
       content="Descubrí puntos cercanos, desbloqueá historias e insignias, recorré rutas recomendadas y conectá con comercios locales."
     >
-    <meta property="og:image" content="/src/assets/banner.jpg">
+    <meta property="og:image" content="https://xendaria.com.ar/src/assets/banner.jpg">
+
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/png" href="/src/assets/logo-oficial.png">
+    <meta name="twitter:title" content="Xendaria | Explorá Buenos Aires de otra forma">
+    <meta
+      name="twitter:description"
+      content="Descubrí puntos cercanos, desbloqueá historias e insignias, recorré rutas recomendadas y conectá con comercios locales."
+    >
+    <meta name="twitter:image" content="https://xendaria.com.ar/src/assets/banner.jpg">
+
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     >
-    <title>Xendaria - Turismo urbano, rutas y comercios locales</title>
   </head>
 
   <body class="bg-crema text-uva">
@@ -532,26 +551,22 @@
                 <input name="redes" type="text" placeholder="@comercio o https://...">
               </label>
 
-              <div class="grid gap-4 md:grid-cols-2">
+              <div class="grid gap-4">
                 <label class="form-field">
                   <span>Tipo de beneficio</span>
-                  <select name="tipoBeneficio" required>
+                  <select name="tipoBeneficio" id="tipo-beneficio" required>
                     <option value="">Seleccionar beneficio</option>
                     <option value="descuento">Descuento porcentual</option>
-                    <option value="cortesia">Producto o consumición de cortesía</option>
+                    <option value="cortesia">Producto de cortesía</option>
                     <option value="primera_visita">Beneficio por primera visita</option>
-                    <option value="ruta">Beneficio al completar una ruta</option>
-                    <option value="otro">Otro beneficio</option>
+                    <option value="contacto_equipo">Solicitar contacto del equipo</option>
                   </select>
                 </label>
 
-                <label class="form-field">
-                  <span>Detalle del beneficio</span>
-                  <span class="textarea-with-counter">
-                    <textarea name="beneficio" rows="3" maxlength="180" placeholder="Ej: 10% de descuento en la primera visita." required></textarea>
-                    <small id="beneficio-count" class="field-counter">0/180</small>
-                  </span>
-                </label>
+                <div id="beneficio-wrapper" class="form-field hidden">
+                  <div id="beneficio-dinamico" class="grid gap-3"></div>
+                  <input type="hidden" name="beneficio" id="beneficio-hidden" required>
+                </div>
               </div>
 
               <label class="form-field">

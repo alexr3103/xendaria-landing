@@ -33,8 +33,10 @@ const productTrack = document.querySelector(".product-track");
 const productGroup = productTrack?.querySelector(".product-group");
 const emailInput = sponsorForm?.querySelector('input[name="email"]');
 const phoneInput = sponsorForm?.querySelector('input[name="telefono"]');
-const benefitInput = sponsorForm?.querySelector('textarea[name="beneficio"]');
-const benefitCounter = document.getElementById("beneficio-count");
+const benefitTypeInput = document.getElementById("tipo-beneficio");
+const benefitDynamic = document.getElementById("beneficio-dinamico");
+const benefitHidden = document.getElementById("beneficio-hidden");
+const benefitWrapper = document.getElementById("beneficio-wrapper");
 const storyInput = sponsorForm?.querySelector('textarea[name="historia"]');
 const badgeRadios = sponsorForm?.querySelectorAll('input[name="quiereInsignia"]');
 const storyLinkField = document.getElementById("asociar-historia-field");
@@ -71,6 +73,9 @@ if (productTrack && productGroup) {
   const repeatedProducts = productGroup.cloneNode(true);
   repeatedProducts.setAttribute("aria-hidden", "true");
   productTrack.appendChild(repeatedProducts);
+
+  const baseWidth = productGroup.getBoundingClientRect().width;
+  productTrack.style.setProperty("--marquee-distance", `-${baseWidth}px`);
 }
 
 function closeMobileMenu() {
@@ -244,9 +249,161 @@ function validatePhone() {
   return isValid;
 }
 
-function updateBenefitCounter() {
-  if (!benefitInput || !benefitCounter) return;
-  benefitCounter.textContent = `${benefitInput.value.length}/180`;
+function crearBotonesOpciones(opciones, onSelect, valorActivo = "") {
+  const wrapper = document.createElement("div");
+  wrapper.className = "flex flex-wrap gap-2";
+
+  opciones.forEach((opcion) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = opcion.label;
+    button.dataset.value = opcion.value;
+
+    const seleccionado = valorActivo === opcion.value;
+
+    button.className = seleccionado
+      ? "rounded-full border border-morado bg-morado text-crema px-4 py-2 text-sm font-bold shadow-sm transition"
+      : "rounded-full border border-uva/10 bg-crema px-4 py-2 text-sm font-bold text-uva transition hover:border-morado hover:bg-morado/10";
+
+    button.addEventListener("click", () => onSelect(opcion.value));
+    wrapper.appendChild(button);
+  });
+
+  return wrapper;
+}
+
+function actualizarBeneficioHidden(valor) {
+  if (!benefitHidden) return;
+  benefitHidden.value = valor || "";
+}
+
+function renderBeneficioFields() {
+  if (!benefitTypeInput || !benefitDynamic || !benefitHidden || !benefitWrapper) return;
+
+  const tipo = benefitTypeInput.value;
+  benefitDynamic.innerHTML = "";
+  actualizarBeneficioHidden("");
+
+  if (!tipo) {
+    benefitWrapper.classList.add("hidden");
+    return;
+  }
+
+  benefitWrapper.classList.remove("hidden");
+
+  if (tipo === "descuento") {
+    const titulo = document.createElement("p");
+    titulo.className = "text-sm font-bold text-uva/75";
+    titulo.textContent = "Elegí el porcentaje de descuento";
+    benefitDynamic.appendChild(titulo);
+
+    const opciones = [
+      { value: "10", label: "10%" },
+      { value: "15", label: "15%" },
+      { value: "20", label: "20%" },
+      { value: "25", label: "25%" },
+    ];
+
+    const botones = crearBotonesOpciones(opciones, (value) => {
+      benefitTypeInput.dataset.selectedDetail = value;
+      actualizarBeneficioHidden(`${value}% de descuento`);
+      renderBeneficioFields();
+    }, benefitTypeInput.dataset.selectedDetail || "");
+
+    benefitDynamic.appendChild(botones);
+    return;
+  }
+
+  if (tipo === "cortesia") {
+    const titulo = document.createElement("p");
+    titulo.className = "text-sm font-bold text-uva/75";
+    titulo.textContent = "Especificá cuál sería el producto o beneficio de cortesía";
+    benefitDynamic.appendChild(titulo);
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.maxLength = 80;
+    input.placeholder = "Ej: bebida sin alcohol, entrada gratis, accesorio de regalo";
+    input.className =
+      "w-full rounded-[1.1rem] border border-uva/10 bg-crema px-4 py-3 text-sm font-bold text-uva outline-none transition placeholder:text-uva/40 focus:border-morado focus:ring-4 focus:ring-morado/10";
+    input.value = benefitTypeInput.dataset.selectedDetail || "";
+
+    input.addEventListener("input", (event) => {
+      const valor = event.target.value.trim();
+      benefitTypeInput.dataset.selectedDetail = valor;
+      actualizarBeneficioHidden(valor ? `${valor} de cortesía` : "");
+    });
+
+    benefitDynamic.appendChild(input);
+
+    actualizarBeneficioHidden(
+      benefitTypeInput.dataset.selectedDetail?.trim()
+        ? `${benefitTypeInput.dataset.selectedDetail.trim()} de cortesía`
+        : ""
+    );
+
+    return;
+  }
+
+  if (tipo === "primera_visita") {
+    const titulo = document.createElement("p");
+    titulo.className = "text-sm font-bold text-uva/75";
+    titulo.textContent = "Elegí qué beneficio se desbloquea en la primera visita";
+    benefitDynamic.appendChild(titulo);
+
+    const opciones = [
+      { value: "10% de descuento en la primera visita", label: "10% off" },
+      { value: "15% de descuento en la primera visita", label: "15% off" },
+      { value: "20% de descuento en la primera visita", label: "20% off" },
+      { value: "Producto de cortesía en la primera visita", label: "Cortesía" },
+    ];
+
+    const botones = crearBotonesOpciones(
+      opciones,
+      (value) => {
+        benefitTypeInput.dataset.selectedDetail = value;
+        actualizarBeneficioHidden(value);
+        renderBeneficioFields();
+      },
+      benefitTypeInput.dataset.selectedDetail || ""
+    );
+
+    benefitDynamic.appendChild(botones);
+    return;
+  }
+  if (tipo === "contacto_equipo") {
+    const ayuda = document.createElement("p");
+    ayuda.className = "text-sm font-bold text-uva/75";
+    ayuda.textContent =
+      "Si necesitás una propuesta personalizada, nuestro equipo se va a comunicar con vos.";
+    benefitDynamic.appendChild(ayuda);
+
+    const textarea = document.createElement("textarea");
+    textarea.rows = 3;
+    textarea.maxLength = 180;
+    textarea.placeholder = "Contanos brevemente qué te gustaría ofrecer.";
+    textarea.className =
+      "w-full rounded-[1.1rem] border border-uva/10 bg-crema px-4 py-3 text-sm font-bold text-uva outline-none transition placeholder:text-uva/40 focus:border-morado focus:ring-4 focus:ring-morado/10";
+    textarea.value = benefitTypeInput.dataset.selectedComment || "";
+
+    textarea.addEventListener("input", (event) => {
+      const comentario = event.target.value.trim();
+      benefitTypeInput.dataset.selectedComment = comentario;
+      actualizarBeneficioHidden(
+        comentario
+          ? `Solicita contacto del equipo: ${comentario}`
+          : "Solicita contacto del equipo"
+      );
+    });
+
+    benefitDynamic.appendChild(textarea);
+
+    actualizarBeneficioHidden(
+      benefitTypeInput.dataset.selectedComment?.trim()
+        ? `Solicita contacto del equipo: ${benefitTypeInput.dataset.selectedComment.trim()}`
+        : "Solicita contacto del equipo"
+    );
+  }
 }
 
 function validateStoryAssociation() {
@@ -277,13 +434,19 @@ function updateBadgeOptions() {
 
 emailInput?.addEventListener("input", validateEmail);
 phoneInput?.addEventListener("input", validatePhone);
-benefitInput?.addEventListener("input", updateBenefitCounter);
+benefitTypeInput?.addEventListener("change", () => {
+  benefitTypeInput.dataset.selectedDetail = "";
+  benefitTypeInput.dataset.selectedVisit = "";
+  benefitTypeInput.dataset.selectedReward = "";
+  benefitTypeInput.dataset.selectedComment = "";
+  renderBeneficioFields();
+});
 storyInput?.addEventListener("input", validateStoryAssociation);
 storyLinkInput?.addEventListener("change", validateStoryAssociation);
 badgeRadios?.forEach((radio) => radio.addEventListener("change", updateBadgeOptions));
 
-updateBenefitCounter();
 updateBadgeOptions();
+renderBeneficioFields();
 
 function setFormMessage(type, text) {
   if (!formMessage) return;
@@ -368,12 +531,18 @@ sponsorForm?.addEventListener("submit", async (event) => {
     );
     sponsorForm.reset();
     planInput.value = "1 mes";
+    if (benefitTypeInput) {
+      benefitTypeInput.dataset.selectedDetail = "";
+      benefitTypeInput.dataset.selectedVisit = "";
+      benefitTypeInput.dataset.selectedReward = "";
+      benefitTypeInput.dataset.selectedComment = "";
+    }
+    renderBeneficioFields();
     planButtons.forEach((button, index) => {
       const isSelected = index === 0;
       button.classList.toggle("is-selected", isSelected);
       button.setAttribute("aria-pressed", String(isSelected));
     });
-    updateBenefitCounter();
     updateBadgeOptions();
   } catch (error) {
     setFormMessage(

@@ -663,7 +663,7 @@
 
   .form-field input:user-invalid,
   .form-field select:user-invalid,
-  .form-field textarea:user-invalid {
+  .form-field textarea:user-invalid  {
     @apply border-fucsia ring-4 ring-fucsia/10;
   }
 
@@ -675,8 +675,17 @@
     @apply relative block;
   }
 
-  .textarea-with-counter textarea {
-    @apply block pb-8;
+  .form-field select {
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, #401A37 50%),
+      linear-gradient(135deg, #401A37 50%, transparent 50%);
+    background-position:
+      calc(100% - 22px) calc(50% - 2px),
+      calc(100% - 16px) calc(50% - 2px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 3rem;
   }
 
   .insignia-choice {
@@ -743,10 +752,19 @@
   }
 
   .product-marquee {
-    @apply mt-4 overflow-x-auto pb-5;
+    @apply mt-4 overflow-hidden pb-5;
     scrollbar-width: none;
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
     -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
     mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  }
+
+  @media (max-width: 767px) {
+    .product-marquee {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
   }
 
   .product-marquee::-webkit-scrollbar {
@@ -776,6 +794,9 @@
   .product-slide img {
     @apply aspect-square w-full object-cover;
     background-color: rgba(209, 209, 209, 0.3);
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
   }
 
   .product-slide h3 {
@@ -1014,7 +1035,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(var(--marquee-distance, -50%));
   }
 }
 
