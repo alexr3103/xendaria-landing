@@ -514,11 +514,11 @@
 
               <div class="grid gap-4 md:grid-cols-2">
                 <label class="form-field">
-                  <span>Nombre del comercio</span>
+                  <span>Nombre del comercio <span class="required-mark" aria-hidden="true">*</span></span>
                   <input name="nombreComercio" type="text" placeholder="Ej: Café Rufina" required>
                 </label>
                 <label class="form-field">
-                  <span>Rubro</span>
+                  <span>Rubro <span class="required-mark" aria-hidden="true">*</span></span>
                   <select name="rubro" required>
                     <option value="">Seleccionar rubro</option>
                     <option>Gastronomía</option>
@@ -531,17 +531,17 @@
               </div>
 
               <label class="form-field">
-                <span>Dirección</span>
+                <span>Dirección <span class="required-mark" aria-hidden="true">*</span></span>
                 <input name="direccion" type="text" placeholder="Ej: Av. Corrientes 1234, CABA" required>
               </label>
 
               <div class="grid gap-4 md:grid-cols-2">
                 <label class="form-field">
-                  <span>Email</span>
+                  <span>Email <span class="required-mark" aria-hidden="true">*</span></span>
                   <input name="email" type="email" autocomplete="email" placeholder="contacto@comercio.com" required>
                 </label>
                 <label class="form-field">
-                  <span>Teléfono</span>
+                  <span>Teléfono <span class="required-mark" aria-hidden="true">*</span></span>
                   <input name="telefono" type="tel" inputmode="tel" autocomplete="tel" minlength="8" maxlength="24" pattern="[0-9+() -]{8,24}" placeholder="11 1234 5678" required>
                 </label>
               </div>
@@ -553,7 +553,7 @@
 
               <div class="grid gap-4">
                 <label class="form-field">
-                  <span>Tipo de beneficio</span>
+                  <span>Tipo de beneficio <span class="required-mark" aria-hidden="true">*</span></span>
                   <select name="tipoBeneficio" id="tipo-beneficio" required>
                     <option value="">Seleccionar beneficio</option>
                     <option value="descuento">Descuento porcentual</option>
@@ -565,7 +565,7 @@
 
                 <div id="beneficio-wrapper" class="form-field hidden">
                   <div id="beneficio-dinamico" class="grid gap-3"></div>
-                  <input type="hidden" name="beneficio" id="beneficio-hidden" required>
+                  <input type="hidden" name="beneficio" id="beneficio-hidden">
                 </div>
               </div>
 

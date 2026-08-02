@@ -655,6 +655,10 @@
     @apply text-sm font-extrabold text-uva/80;
   }
 
+  .form-field .required-mark {
+    @apply text-fucsia;
+  }
+
   .form-field input,
   .form-field select,
   .form-field textarea {
