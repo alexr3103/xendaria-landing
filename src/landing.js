@@ -313,6 +313,11 @@ function renderBeneficioFields() {
     }, benefitTypeInput.dataset.selectedDetail || "");
 
     benefitDynamic.appendChild(botones);
+    actualizarBeneficioHidden(
+      benefitTypeInput.dataset.selectedDetail
+        ? `${benefitTypeInput.dataset.selectedDetail}% de descuento`
+        : ""
+    );
     return;
   }
 
@@ -371,6 +376,7 @@ function renderBeneficioFields() {
     );
 
     benefitDynamic.appendChild(botones);
+    actualizarBeneficioHidden(benefitTypeInput.dataset.selectedDetail || "");
     return;
   }
   if (tipo === "contacto_equipo") {
